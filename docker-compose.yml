@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dockerville:
+    image: dockerville
+    build:
+      context: .
+      dockerfile: ./Dockerfile
