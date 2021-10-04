@@ -1,0 +1,9 @@
+version: "2.0"
+services:
+  sayhi:
+    image: alpine
+    build: 
+      context: .
+      network: none
+      dockerfile: Dockerfile
+      
