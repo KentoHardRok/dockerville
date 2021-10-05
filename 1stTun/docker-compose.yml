@@ -1,0 +1,18 @@
+version: 2
+services:
+  wgtun:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    read_only: true
+    image: 1sttun
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 51820:51820
+    devices:
+      - /dev/net/wg
+    environment:
+      ## enter variables
+    network_mode: bridge #or whatever
