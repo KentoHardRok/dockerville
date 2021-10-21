@@ -14,5 +14,5 @@ services:
     devices:
       - /dev/net/wg
     environment:
-      ## enter variables
+       enter variables
     network_mode: bridge #or whatever
