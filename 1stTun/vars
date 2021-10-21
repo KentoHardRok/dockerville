@@ -1,5 +1,3 @@
-#!/bin/sh
-
 WG_DIR=/etc/wireguard
 SERVER_PRIV=$WG_DIR/key.priv
 SERVER_PUB=$WG_DIR/key.pub
