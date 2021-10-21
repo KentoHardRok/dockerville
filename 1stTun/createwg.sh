@@ -2,10 +2,9 @@
 
 set -euo pipefail
 
-cd $WG_DIR
-
 source vars
 
+cd $WG_DIR
 
 create_server() {
     umask 077
@@ -19,12 +18,12 @@ create_client() {
     PEERCONF="$NAME.conf"
     wg genkey | tee $NAME.priv | wg pubkey > $NAME.pub
     cat peer_setup.conf >> wg0.conf
-    sed -i s/"<CLIENT PUBLIC KEY>"/$CLIENT_PUB/g wg0.conf    
+    sed -i s/"<CLIENT PUBLIC KEY>"/"$(<$NAME.pub)"/g wg0.conf    
     sed -i s/"<CLIENT PRIV IP>"/$(expr 1 + $1)/g wg0.conf    
     cat wgpeer.conf >> $PEERCONF
     sed -i s/"<EXT IP>"/$EXT_IP/g $PEERCONF    
     sed -i s/"<SERVER PUBLIC KEY>"/$SERVER_PUB/g $PEERCONF
-    sed -i s/"<CLIENT PRIVATE KEY>"/$CLIENT_PRIV/g $PEERCONF    
+    sed -i s/"<CLIENT PRIVATE KEY>"/"$(<$NAME.priv)"/g $PEERCONF    
 
 }
 create_server
