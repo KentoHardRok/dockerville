@@ -24,8 +24,8 @@ create_client() {
     PEERCONF="/etc/wireguard/client/$NAME.conf"
     wg genkey | tee $NAME.priv | wg pubkey > $NAME.pub
     cat peer_setup.conf >> wg0.conf
-    sed -i "s|<CLIENT PUBLIC KEY>|$(cat $NAME.pub)|g" $PEERCONF    
-    sed -i "s|<CLIENT PRIV IP>|$(expr 1 + $1)|g" -i wg0.conf    
+    sed -i "s|<CLIENT PUBLIC KEY>|$(cat $NAME.pub)|g" wg0.conf    
+    sed -i "s|<CLIENT PRIV IP>|$(expr 1 + $1)|g" wg0.conf    
     cat wgpeer.conf >> $PEERCONF
     sed -i "s|<CLIENT PRIV IP>|$(expr 1 + $1)|g" $PEERCONF    
     sed -i "s|<EXT IP>|$EXT_IP|g" $PEERCONF    

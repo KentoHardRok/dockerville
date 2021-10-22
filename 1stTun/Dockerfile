@@ -14,4 +14,4 @@ RUN chmod +x /usr/local/bin/createwg.sh
 RUN mkdir client
 RUN /usr/local/bin/createwg.sh
 EXPOSE 51820/udp
-ENTRYPOINT ['wg-quick', 'up', 'wg0']
+CMD ['wg-quick', 'up', 'wg0']
