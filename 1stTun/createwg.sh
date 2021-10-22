@@ -30,10 +30,13 @@ create_client() {
 }
 
 
-create_server
-for ((i=0; i <= $NUM_CLIENTS; i++)); do
-    create_client $i
-    done
+main () {
+    create_server
+    for ((i=0; i <= $NUM_CLIENTS; i++)); do
+        create_client $i
+        done
+}
 
 
+main
 
