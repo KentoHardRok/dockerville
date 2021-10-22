@@ -21,22 +21,23 @@ create_client() {
     PEERCONF="/etc/wireguard/client/$NAME.conf"
     wg genkey | tee "$NAME".priv | wg pubkey > "$NAME".pub
     cat peer_setup.conf >> wg0.conf
-    sed -i "s|<CLIENT PUBLIC KEY>|$("cat $NAME.pub")|g" wg0.conf    
-    sed -i "s|<CLIENT PRIV IP>|$("expr 1 + $1")|g" wg0.conf    
+    sed -i "s|<CLIENT PUBLIC KEY>|$(cat $NAME.pub)|g" wg0.conf    
+    sed -i "s|<CLIENT PRIV IP>|$(expr 1 + $1)|g" wg0.conf    
+    sed -i "s|<PRIVATE SUBNET>|$PRIV_NET|" wg0.conf        
     cat wgpeer.conf >> "$PEERCONF"
-    sed -i "s|<PRIVATE SUBNET>|$PRIV_NET|g" "$PEERCONF"        
-    sed -i "s|<CLIENT PRIV IP>|$("expr 1 + $1")|g" "$PEERCONF"    
+    sed -i "s|<PRIVATE SUBNET>|$PRIV_NET|" "$PEERCONF"        
+    sed -i "s|<CLIENT PRIV IP>|$(expr 1 + $1)|g" "$PEERCONF"    
     sed -i "s|<EXT IP>|$EXT_IP|g" "$PEERCONF"    
     sed -i "s|<PORT>|$WG_PORT|g" "$PEERCONF"
     sed -i "s|<SERVER PUBLIC KEY>|$SERVER_PUB|g" "$PEERCONF"
-    sed -i "s|<CLIENT PRIVATE KEY>|$(cat "$NAME".priv)|g" -i "$PEERCONF"    
+    sed -i "s|<CLIENT PRIVATE KEY>|$(cat $NAME.priv)|g" -i "$PEERCONF"    
 
 }
 
 
 main () {
     create_server
-    for ((i=0; i <= $NUM_CLIENTS; i++)); do
+    for ((i=1; i <= $NUM_CLIENTS; i++)); do
         create_client $i
         done
 }
