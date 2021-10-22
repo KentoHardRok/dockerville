@@ -1,6 +1,4 @@
 WG_DIR=/etc/wireguard
-SERVER_PRIV=$(cat $WG_DIR/key.priv)
-SERVER_PUB=$(cat $WG_DIR/key.pub)
 WG_PORT=51820
 NUM_CLIENTS=0
 EXT_IP=172.16.1.100
