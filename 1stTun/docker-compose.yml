@@ -14,5 +14,9 @@ services:
     devices:
       - /dev/net/wg
     environment:
+      - ENV WG_PORT=51820
+      - ENV NUM_CLIENTS=10
+      - ENV PRIV_NET=10.0.0.
+      - ENV EXT_IP=172.16.1.100
        enter variables
     network_mode: bridge #or whatever
