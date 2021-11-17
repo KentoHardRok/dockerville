@@ -1,4 +1,4 @@
-version: 2
+version: "2"
 services:
   wgtun:
     build: 
@@ -9,14 +9,12 @@ services:
     restart: always
     cap_add:
       - NET_ADMIN
+      - SYS_ADMIN
     ports:
       - 51820:51820
-    devices:
-      - /dev/net/wg
     environment:
-      - ENV WG_PORT=51820
-      - ENV NUM_CLIENTS=10
-      - ENV PRIV_NET=10.0.0.
-      - ENV EXT_IP=172.16.1.100
-       enter variables
+      - WG_PORT=51820
+      - NUM_CLIENTS=10
+      - PRIV_NET=10.0.0.
+      - EXT_IP=172.16.0.10
     network_mode: bridge #or whatever

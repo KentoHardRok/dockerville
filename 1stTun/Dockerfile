@@ -14,6 +14,7 @@ WORKDIR /etc/wireguard
 COPY wg0.conf wgpeer.conf peer_setup.conf ./
 COPY createwg /usr/local/bin/
 RUN chmod +x /usr/local/bin/createwg && \
-    mkdir client
+    mkdir client && \
+    chmod +wr  
 ENTRYPOINT ["createwg"] 
 CMD ["wg-quick","up","wg0"]
