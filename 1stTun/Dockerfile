@@ -1,7 +1,6 @@
 FROM alpine:latest
 LABEL Tom Wilent
 RUN apk update && \
-    apk upgrade && \ 
     apk add \
         wireguard-tools \
         iptables \
@@ -14,7 +13,5 @@ WORKDIR /etc/wireguard
 COPY wg0.conf wgpeer.conf peer_setup.conf ./
 COPY createwg /usr/local/bin/
 RUN chmod +x /usr/local/bin/createwg && \
-    mkdir client && \
-    chmod +wr  
-ENTRYPOINT ["createwg"] 
-CMD ["wg-quick","up","wg0"]
+    mkdir client
+ENTRYPOINT createwg && bash
